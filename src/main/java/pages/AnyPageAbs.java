@@ -24,7 +24,7 @@ public abstract class AnyPageAbs<T> extends CommonActions<T> {
   private String getUrlPrefix() {
     UrlPrefix urlAnnotation = getClass().getAnnotation(UrlPrefix.class);
     if (urlAnnotation != null) {
-      return urlAnnotation.value();
+           return urlAnnotation.value();
     }
 
     return "";
@@ -34,6 +34,11 @@ public abstract class AnyPageAbs<T> extends CommonActions<T> {
     driver.get(getBaseUrl() + getUrlPrefix());
 
     return (T) page(getClass());
+  }
+
+  public String getHref(String addition) {
+    return (getBaseUrl() + addition);
+
   }
 
   public <T> T page(Class<T> clazz) {

@@ -1,6 +1,8 @@
 package ui.courses;
 
 import annotations.Driver;
+import annotations.UrlPrefix;
+import com.fasterxml.jackson.annotation.JacksonInject;
 import components.HeaderMenuComponent;
 import data.menu.CourcesData;
 import data.menu.MenuItemData;
@@ -31,11 +33,14 @@ public class HeaderMenu_Test {
             .clickCourseItem(CourcesData.Pyton_Developer)
             .checkDateOfStart();
   }
+
   @Test
   public void scrollToElement() {
-    String href = "https://otus.ru/faq";
+    String addition = "/faq";
     String xpath ="//a/div[text()='FAQ']/..";
     MainPage mainPage = new MainPage(driver);
+    String href =mainPage.getHref(addition);
+    System.out.println(href);
     mainPage.open();
     WebElement faqElement = driver.findElement(By.xpath("//a/div[text()='FAQ']"));
     Actions actions = new Actions(driver);
@@ -46,9 +51,10 @@ public class HeaderMenu_Test {
   }
   @Test
   public void  moveToElement (){
-    String href = "https://otus.ru/contacts";
+    String addition = "/contacts";
     String xpath ="//*[@id=\"__next\"]//div[5]//a[6]";
     MainPage mainPage = new MainPage(driver);
+    String href =mainPage.getHref(addition);
     mainPage.open();
     WebElement informationItemElement = driver.findElement(By.xpath("//span[text()='Информация']"));
     Actions actions = new Actions(driver);
